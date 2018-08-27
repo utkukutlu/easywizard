@@ -1,0 +1,59 @@
+/**
+ * User: utku
+ * Date: 16.08.2018
+ * Time: 12:11
+ * Web : http://www.utkukutlu.com
+ */
+
+.easywizard {
+    position: relative;
+    margin: 10px 0;
+}
+
+.easywizard-steps {
+    position: relative;
+    margin: 10px 0;
+    display: block;
+    width: 100%;
+}
+
+.easywizard-step {
+    cursor: pointer;
+    border: 4px solid #5cb85c;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    line-height: 20px;
+    text-align: center;
+    background: #5cb85c;
+    color: #fff;
+    float: left;
+    margin: 0 20px;
+    z-index: 99;
+    transform: scale(1);
+    transition: transform .3s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.easywizard-step.active {
+    background: #337ab7;
+    transform: scale(1.4);
+    border-color: #5cb85c;
+}
+
+.easywizard-content {
+    display: none;
+}
+
+.easywizard-buttons {
+    float: right;
+}
+
+.easywizard-buttons:after {
+    content: '';
+    clear: both;
+}
