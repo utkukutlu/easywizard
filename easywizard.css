@@ -17,6 +17,10 @@
     width: 100%;
 }
 
+.easywizard-steps-container {
+    display: inline-block;
+}
+
 .easywizard-step {
     cursor: pointer;
     border: 4px solid #5cb85c;
