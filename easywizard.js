@@ -21,8 +21,10 @@ $.fn.easyWizard = function () {
     parent.find(".easywizard-content.active").show();
     parent.find(".easywizard-step").last().after("<div style='clear:both;'></div>");
 
-    var top = parent.find(".easywizard-steps").height() / 2 - 10    ;
+    var top = parent.find(".easywizard-steps").height() / 2 - 10;
     parent.find(".easywizard-steps").append("<div class='easywizard-bar' style='position:absolute;width:100%;top:" + top + "px;height:10px;background:#5cb85c;z-index:-1;border-radius:10px;'></div>");
+    parent.find(".easywizard-steps").append("<div class='easywizard-bar-passed' style='position:absolute;width:0%;top:" + top + "px;height:10px;background:#337ab7;z-index:-1;border-radius:10px;transition:width .2s;'></div>");
+
 
     parent.find(".easywizard-step").click(function () {
         changeStep($(this).data("href"));
@@ -49,16 +51,50 @@ $.fn.easyWizard = function () {
 
 
     function changeStep(id) {
+        var isFirstStep = typeof id == "undefined" ? true : false;
         if ($(".easywizard-step.active").data("href") == id) {
             return false;
         }
         $(".easywizard-step.active").removeClass("active");
-        $(".easywizard-step[data-href='" + id + "']").addClass("active");
-        parent.find(".easywizard-content").hide();
-        parent.find(id).fadeIn();
+        if (isFirstStep == true) {
+            $(".easywizard-step").eq(0).addClass("active");
+        } else {
+            $(".easywizard-step[data-href='" + id + "']").addClass("active");
+            parent.find(".easywizard-content").hide();
+            parent.find(id).fadeIn();
+        }
+
+        var currentStep = $(".easywizard-steps .easywizard-step.active").index();
+        var stepCount = $(".easywizard-steps .easywizard-step").length;
+        var width = $(".easywizard-steps .easywizard-step").eq(currentStep).offset().left;
+
+        for (var i = 0; i < stepCount; i++) {
+            var el = $(".easywizard-steps .easywizard-step").eq(i);
+
+            if (i < currentStep) {
+                el.addClass("passed-step");
+            } else {
+                el.removeClass("passed-step");
+            }
+
+        }
+
+        if (currentStep == (stepCount - 1)) {
+            $(".easywizard-steps .easywizard-step").addClass("passed-step");
+        }
+
+        if (currentStep == stepCount - 1) {
+            $(".easywizard-bar-passed").css({"width": "100%"});
+        } else {
+            $(".easywizard-bar-passed").css({"width": width});
+        }
+
+
     }
 
-    parent.find("[type='submit']").click(function (e) {
+    changeStep();
+
+    parent.find(".easywizard button[type='submit'] , .easywizard-submit-btn").click(function (e) {
 
 
         var validate = true;
