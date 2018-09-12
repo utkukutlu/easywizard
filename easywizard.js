@@ -22,8 +22,8 @@ $.fn.easyWizard = function () {
     parent.find(".easywizard-step").last().after("<div style='clear:both;'></div>");
 
     var top = parent.find(".easywizard-steps").height() / 2 - 10;
-    parent.find(".easywizard-steps").append("<div class='easywizard-bar' style='position:absolute;width:100%;top:" + top + "px;height:10px;background:#5cb85c;z-index:-1;border-radius:10px;'></div>");
-    parent.find(".easywizard-steps").append("<div class='easywizard-bar-passed' style='position:absolute;width:0%;top:" + top + "px;height:10px;background:#337ab7;z-index:-1;border-radius:10px;transition:width .2s;'></div>");
+    parent.find(".easywizard-steps").append("<div class='easywizard-bar' style='position:absolute;width:100%;top:" + top + "px;height:10px;background:#5cb85c;z-index:-1;border-radius:10px;border: inset 1px #efefef;'></div>");
+    parent.find(".easywizard-steps").append("<div class='easywizard-bar-passed' style='position:absolute;width:0%;top:" + top + "px;height:10px;background:#337ab7;z-index:-1;border-radius:10px;transition:width .2s;border: inset 1px #efefef;'></div>");
 
 
     parent.find(".easywizard-step").click(function () {
