@@ -7,34 +7,34 @@
 
 
 $.fn.easyWizard = function () {
-    var parent = this;
+    var _this = this;
 
 
-    if (parent.find(".easywizard-step.active").length <= 0) {
-        parent.find(".easywizard-step").eq(0).addClass("active");
+    if (_this.find(".easywizard-step.active").length <= 0) {
+        _this.find(".easywizard-step").eq(0).addClass("active");
     }
-    if (parent.find(".easywizard-content.active").length <= 0) {
-        parent.find(".easywizard-content").eq(0).addClass("active");
+    if (_this.find(".easywizard-content.active").length <= 0) {
+        _this.find(".easywizard-content").eq(0).addClass("active");
     }
 
-    parent.find(".easywizard-content").hide();
-    parent.find(".easywizard-content.active").show();
-    parent.find(".easywizard-step").last().after("<div style='clear:both;'></div>");
+    _this.find(".easywizard-content").hide();
+    _this.find(".easywizard-content.active").show();
+    _this.find(".easywizard-step").last().after("<div style='clear:both;'></div>");
 
-    var top = parent.find(".easywizard-steps").height() / 2 - 10;
-    parent.find(".easywizard-steps").append("<div class='easywizard-bar' style='position:absolute;width:100%;top:" + top + "px;height:10px;background:#5cb85c;z-index:-1;border-radius:10px;border: inset 1px #efefef;'></div>");
-    parent.find(".easywizard-steps").append("<div class='easywizard-bar-passed' style='position:absolute;width:0%;top:" + top + "px;height:10px;background:#337ab7;z-index:-1;border-radius:10px;transition:width .2s;border: inset 1px #efefef;'></div>");
+    var top = _this.find(".easywizard-steps").height() / 2 - 10;
+    _this.find(".easywizard-steps").append("<div class='easywizard-bar' style='position:absolute;width:100%;top:" + top + "px;height:10px;background:#5cb85c;z-index:-1;border-radius:10px;border: inset 1px #efefef;'></div>");
+    _this.find(".easywizard-steps").append("<div class='easywizard-bar-passed' style='position:absolute;width:0%;top:" + top + "px;height:10px;background:#337ab7;z-index:-1;border-radius:10px;transition:width .2s;border: inset 1px #efefef;'></div>");
 
 
-    parent.find(".easywizard-step").click(function () {
+    _this.find(".easywizard-step").click(function () {
         changeStep($(this).data("href"));
     });
 
-    parent.find(".easywizard-btn").click(function () {
+    _this.find(".easywizard-btn").click(function () {
         if ($(this).hasClass("next")) {
-            var el = parent.find(".easywizard-step.active").next(".easywizard-step").data("href");
+            var el = _this.find(".easywizard-step.active").next(".easywizard-step").data("href");
         } else {
-            var el = parent.find(".easywizard-step.active").prev(".easywizard-step").data("href");
+            var el = _this.find(".easywizard-step.active").prev(".easywizard-step").data("href");
         }
         if (el.length > 0) {
             changeStep(el);
@@ -45,7 +45,7 @@ $.fn.easyWizard = function () {
         return $(this).height();
     }).get());
 
-    parent.find(".easywizard-contents").css({
+    _this.find(".easywizard-contents").css({
         "min-height": (maxHeight + 50) + "px"
     });
 
@@ -60,8 +60,8 @@ $.fn.easyWizard = function () {
             $(".easywizard-step").eq(0).addClass("active");
         } else {
             $(".easywizard-step[data-href='" + id + "']").addClass("active");
-            parent.find(".easywizard-content").hide();
-            parent.find(id).fadeIn();
+            _this.find(".easywizard-content").hide();
+            _this.find(id).fadeIn();
         }
 
         var currentStep = $(".easywizard-steps .easywizard-step.active").index();
@@ -94,13 +94,13 @@ $.fn.easyWizard = function () {
 
     changeStep();
 
-    parent.find(".easywizard button[type='submit'] , .easywizard-submit-btn").click(function (e) {
+    _this.find(".easywizard button[type='submit'] , .easywizard-submit-btn").click(function (e) {
 
 
         var validate = true;
 
 
-        parent.find(":input").each(function () {
+        _this.find(":input").each(function () {
             if (($(this).val() === null || $(this).val().trim() === "") && $(this).attr("required") !== undefined) {
 
                 $(this).parents(".form-group").addClass("has-error");
@@ -109,7 +109,7 @@ $.fn.easyWizard = function () {
                 var id = $(this).parents(".easywizard-content").attr("id");
 
 
-                var el = parent.find(".easywizard-step[data-href='#" + id + "']");
+                var el = _this.find(".easywizard-step[data-href='#" + id + "']");
 
                 el.addClass("easywizard-step-error");
 
